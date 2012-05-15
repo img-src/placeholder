@@ -4,7 +4,7 @@ if (strpos(__FILE__, $_SERVER['PHP_SELF'])) { header('HTTP/1.0 403 Forbidden'); 
  * Creates temporary placeholder images
  *
  * @package Placeholder
- * @version 0.1
+ * @version 1.0.3
  * @link http://github.com/ughblah/img-src
  */
 class Placeholder {
