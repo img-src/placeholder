@@ -6,23 +6,16 @@ placeholder image generator used on [http://img-src.co](http://img-src.co "img-s
 
 ## how to use ##
 
-	<?php
-	
-	// get values from URL parameters
-	$width = isset($_GET['w']) ? trim($_GET['w']) : null;
-	$height = isset($_GET['h']) ? trim($_GET['h']) : null;
-	$bgColor = isset($_GET['bgColor']) ? strtolower(trim($_GET['bgColor'])) : null;
-	$textColor = isset($_GET['textColor']) ? strtolower(trim($_GET['textColor'])) : null;
-	
-	require($_SERVER['DOCUMENT_ROOT'] . '/../library/placeholder.class.php');
-	
-	try {
-		$placeholder = new Placeholder();
-		$placeholder->setWidth($width);
-		$placeholder->setHeight($height);
-		if ($bgColor) $placeholder->setBgColor($bgColor);
-		if ($textColor) $placeholder->setTextColor($textColor);
-		$placeholder->render();
-	} catch (Exception $e){
-		die($e->getMessage());
-	}
+### quick start ###
+
+clone img-src to your web root and you're ready to go.
+
+    <img src="/i/?w=<width>&h=<height>&bgColor=<bg color hex>&textColor=<text color hex>" />
+
+### advanced setup ###
+
+give me time, this will come shortly.
+
+## shout outs ##
+
+img-src uses the [White Rabbit](http://www.squaregear.net/fonts/whitrabt.shtml "White Rabbit") font by [Matthew Welch](http://www.squaregear.net/ "Matthew Welch").
