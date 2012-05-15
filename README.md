@@ -12,7 +12,7 @@ deploy img-src placeholder files to your web root and you're ready to go using t
 
     <img src="/i/?w=<width>&h=<height>&bgColor=<bg color hex>&textColor=<text color hex>" />
 
-for example:
+examples:
 
 	<img src="/i/?w=50&h=50" />
 	<img src="/i/?w=50&h=80" />
@@ -23,7 +23,7 @@ for example:
 
 to set up "pretty" urls like those used on [http://img-src.co](http://img-src.co "img-src.co"), you'll need to set up your web server to do some rewriting. in apache this can either be done in the configuration file or in an htaccess access file; in nginx you'll need to put this in your configuration file.
 
-for example:
+examples:
 
 	<img src="/50" />
 	<img src="/50x80" />
@@ -65,3 +65,10 @@ for example:
 ## shout outs ##
 
 img-src uses the [White Rabbit](http://www.squaregear.net/fonts/whitrabt.shtml "White Rabbit") font by [Matthew Welch](http://www.squaregear.net/ "Matthew Welch").
+
+## support ##
+
+to report a bug, please use our [github issue tracker](https://github.com/img-src/placeholder/issues "github issue tracker").
+
+## license ##
+img-src placeholder is distributed under the terms of the [MIT license](http://www.opensource.org/licenses/mit-license.php). copyright © 2012
