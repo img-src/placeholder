@@ -22,6 +22,12 @@ for example:
 
 to set up "pretty" urls like those used on [http://img-src.co](http://img-src.co "img-src.co"), you'll need to set up your web server to do some rewriting. in apache this can either be done in the configuration file or in an htaccess access file; in nginx you'll need to put this in your configuration file.
 
+for example:
+
+	<img src="/50x80" />
+	<img src="/50x80/eee" />
+	<img src="/50x80/eee/999" />
+
 #### apache rewrites ####
 
 	RewriteEngine On
