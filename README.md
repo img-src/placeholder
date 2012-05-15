@@ -14,6 +14,7 @@ deploy img-src placeholder files to your web root and you're ready to go using t
 
 for example:
 
+	<img src="/i/?w=50&h=50" />
 	<img src="/i/?w=50&h=80" />
 	<img src="/i/?w=50&h=80&bgColor=eee" />
 	<img src="/i/?w=50&h=80&bgColor=eee&textColor=999" />
@@ -24,6 +25,7 @@ to set up "pretty" urls like those used on [http://img-src.co](http://img-src.co
 
 for example:
 
+	<img src="/50" />
 	<img src="/50x80" />
 	<img src="/50x80/eee" />
 	<img src="/50x80/eee/999" />
