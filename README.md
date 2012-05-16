@@ -78,5 +78,7 @@ img-src uses the [White Rabbit](http://www.squaregear.net/fonts/whitrabt.shtml "
 
 to report a bug, please use our [github issue tracker](https://github.com/img-src/placeholder/issues "github issue tracker").
 
+better yet, if you find a bug, feel free to fix it and submit a pull request!
+
 ## license ##
 img-src placeholder is distributed under the terms of the [MIT license](http://www.opensource.org/licenses/mit-license.php). copyright © 2012
