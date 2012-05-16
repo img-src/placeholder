@@ -2,7 +2,11 @@
 
 ## about ##
 
-placeholder image generator used on [http://img-src.co](http://img-src.co "img-src.co").
+php placeholder image generator used on [http://img-src.co](http://img-src.co "img-src.co").
+
+## requirements ##
+
+*  PHP 5.1.0 or higher
 
 ## how to use ##
 
