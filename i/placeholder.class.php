@@ -9,7 +9,7 @@ if (strpos(__FILE__, $_SERVER['PHP_SELF'])) { header('HTTP/1.0 403 Forbidden'); 
  */
 class Placeholder {
 	private $bgColor, $cache, $cacheDir, $expires, $font, $height, $maxHeight, $maxWidth, $textColor, $width;
-	
+
 	function __construct() {
 		$this->bgColor = 'dddddd';
 		$this->cache = FALSE;
@@ -19,7 +19,7 @@ class Placeholder {
 		$this->maxHeight = 2000;
 		$this->maxWidth = 2000;
 		$this->textColor = '000000';
-    }
+	}
 
 	/**
 	 * Sets background color
