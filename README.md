@@ -63,10 +63,10 @@ examples:
     location ~* "^/(\d+)/([a-f0-9]{3}|[a-f0-9]{6})/?$" {  
       try_files $uri $uri/ /i/index.php?w=$1&h=$1&bgColor=$2;  
     }  
-    location ~* "^/(\d+)x(\d+)/?$" {  
+    location ~ "^/(\d+)x(\d+)/?$" {
       try_files $uri $uri/ /i/index.php?w=$1&h=$2;  
     }  
-    location ~* "^/(\d+)/?$" {  
+    location ~ "^/(\d+)/?$" {
       try_files $uri $uri/ /i/index.php?w=$1&h=$1;  
     }
 
