@@ -49,7 +49,7 @@ examples:
 	RewriteRule ^(\d+)/([a-fA-F0-9]{3}|[a-fA-F0-9]{6})/([a-fA-F0-9]{3}|[a-fA-F0-9]{6})/?$ /i/index.php?w=$1&h=$1&bgColor=$2&textColor=$3
 	RewriteRule ^(\d+)x(\d+)/([a-fA-F0-9]{3}|[a-fA-F0-9]{6})/([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$ /i/index.php?w=$1&h=$2&bgColor=$3&textColor=$4
 
-**nginx rewrites**: this needs to go in your site config file  
+**nginx rewrites**: this needs to go in your site config file. a sample config file is included in the repo
 
     location ~* "^/(\d+)x(\d+)/([a-f0-9]{3}|[a-f0-9]{6})/([a-f0-9]{3}|[a-f0-9]{6})/?$" {  
       try_files $uri $uri/ /i/index.php?w=$1&h=$2&bgColor=$3&textColor=$4;  
