@@ -1,3 +1,4 @@
+# img-src.co placeholder generator rewrites
 RewriteEngine On
 RewriteBase /
 RewriteRule ^(\d+)/?$ /i/index.php?w=$1&h=$1
