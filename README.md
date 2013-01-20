@@ -38,7 +38,7 @@ examples:
 	<img src="/50x80/eee/999" />
 
 
-**apache rewrites**: this can either go in an htaccess file or your site config file
+**apache rewrites**: this can either go in an htaccess file or your site config file. a sample .htaccess file is included in the repo
 
 	RewriteEngine On
 	RewriteBase /
