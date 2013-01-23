@@ -4,13 +4,14 @@ if (strpos(__FILE__, $_SERVER['PHP_SELF'])) { header('HTTP/1.0 403 Forbidden'); 
  * Creates temporary placeholder images
  *
  * @package Placeholder
- * @version 1.1.0
+ * @version 1.1.1
  * @link http://github.com/img-src/placeholder
  */
 class Placeholder {
     private $backgroundColor, $cache, $cacheDir, $expires, $font, $height, $maxHeight, $maxWidth, $textColor, $width;
 
-    function __construct() {
+    function __construct()
+    {
         $this->backgroundColor = 'dddddd';
         $this->cache           = false;
         $this->cacheDir        = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'cache';
@@ -26,7 +27,8 @@ class Placeholder {
      * 
      * @param string $hex - hex code value
      */
-    function setBackgroundColor($hex) {
+    function setBackgroundColor($hex)
+    {
         if (strlen($hex) === 3 || strlen($hex) === 6) {
             if (preg_match('/^[a-f0-9]{3}$|^[a-f0-9]{6}$/i', $hex)) {
                 $this->backgroundColor = $hex;
@@ -39,11 +41,20 @@ class Placeholder {
     }
 
     /**
+     * Gets background color
+     */
+    function getBackgroundColor()
+    {
+        return $this->backgroundColor;
+    }
+
+    /**
      * Sets text color
      * 
      * @param string $hex - hex code value
      */
-    function setTextColor($hex) {
+    function setTextColor($hex)
+    {
         if (strlen($hex) === 3 || strlen($hex) === 6) {
             if (preg_match('/^[a-f0-9]{3}$|^[a-f0-9]{6}$/i', $hex)) {
                 $this->textColor = $hex;
@@ -56,16 +67,33 @@ class Placeholder {
     }
 
     /**
+     * Gets text color
+     */
+    function getTextColor()
+    {
+        return $this->textColor;
+    }
+
+    /**
      * Sets location of TTF font
      * 
      * @param string $fontPath - location of TTF font
      */
-    function setFont($fontPath) {
+    function setFont($fontPath)
+    {
         if (is_readable($fontPath)) {
             $this->font = $fontPath;
         } else {
-            throw new Exception('Font file must exist and be readable by web server.');
+            throw new InvalidArgumentException('Font file must exist and be readable by web server.');
         }
+    }
+
+    /**
+     * Gets location of font
+     */
+    function getFont()
+    {
+        return $this->font;
     }
 
     /**
@@ -73,7 +101,8 @@ class Placeholder {
      * 
      * @param int $expires - seconds used in expires HTTP header 
      */
-    function setExpires($expires) {
+    function setExpires($expires)
+    {
         if (preg_match('/^\d+$/', $expires)) {
             $this->expires = $expires;
         } else {
@@ -82,11 +111,20 @@ class Placeholder {
     }
 
     /**
+     * Get expires header value
+     */
+    function getExpires()
+    {
+        return $this->expires;
+    }
+
+    /**
      * Set maximum width allowed for placeholder image
      * 
      * @param int $maxWidth - maximum width 
      */
-    function setMaxWidth($maxWidth) {
+    function setMaxWidth($maxWidth)
+    {
         if (preg_match('/^\d+$/', $maxWidth)) {
             $this->maxWidth = $maxWidth;
         } else {
@@ -95,11 +133,20 @@ class Placeholder {
     }
 
     /**
+     * Get max width value
+     */
+    function getMaxWidth()
+    {
+        return $this->maxWidth;
+    }
+
+    /**
      * Set maximum height allowed for placeholder image
      * 
      * @param int $maxHeight - maximum height 
      */
-    function setMaxHeight($maxHeight) {
+    function setMaxHeight($maxHeight)
+    {
         if (preg_match('/^\d+$/', $maxHeight)) {
             $this->maxHeight = $maxHeight;
         } else {
@@ -108,11 +155,20 @@ class Placeholder {
     }
 
     /**
+     * Get max height value
+     */
+    function getMaxHeight()
+    {
+        return $this->maxHeight;
+    }
+
+    /**
      * Enable or disable cache
      * 
      * @param bool $cache - whether or not to use cache
      */
-    function setCache($cache) {
+    function setCache($cache)
+    {
         if (is_bool($cache)) {
             $this->cache = $cache;
         } else {
@@ -121,11 +177,20 @@ class Placeholder {
     }
 
     /**
+     * Get cache value
+     */
+    function getCache()
+    {
+        return $this->cache;
+    }
+
+    /**
      * Sets caching path
      * 
      * @param string $cacheDir - path to cache folder, must be writable by web server
      */
-    function setCacheDir($cacheDir) {
+    function setCacheDir($cacheDir)
+    {
         if (is_dir($cacheDir)) {
             $this->cacheDir = $cacheDir;
         } else {
@@ -134,11 +199,20 @@ class Placeholder {
     }
 
     /**
+     * Get cache directory value
+     */
+    function getCacheDir()
+    {
+        return $this->cacheDir;
+    }
+
+    /**
      * Set width of image to render
      * 
      * @param int $width - width of image
      */
-    function setWidth($width) {
+    function setWidth($width)
+    {
         if (preg_match('/^\d+$/', $width)) {
             if ($width > 0) {
                 $this->width = $width;
@@ -151,11 +225,20 @@ class Placeholder {
     }
 
     /**
+     * Get width value
+     */
+    function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
      * Set height of image to render
      * 
      * @param int $height - height of image
      */
-    function setHeight($height) {
+    function setHeight($height)
+    {
         if (preg_match('/^\d+$/', $height)) {
             if ($height > 0) {
                 $this->height = $height;
@@ -168,9 +251,18 @@ class Placeholder {
     }
 
     /**
+     * Get height value
+     */
+    function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
      * Display image and cache (if enabled)
      */
-    function render() {
+    function render()
+    {
         if ($this->width <= $this->maxWidth && $this->height <= $this->maxHeight) {
             $cachePath = $this->cacheDir . '/' . $this->width . '_' . $this->height . '_' . (strlen($this->backgroundColor) === 3 ? $this->backgroundColor[0] . $this->backgroundColor[0] . $this->backgroundColor[1] . $this->backgroundColor[1] . $this->backgroundColor[2] . $this->backgroundColor[2] : $this->backgroundColor) . '_' . (strlen($this->textColor) === 3 ? $this->textColor[0] . $this->textColor[0] . $this->textColor[1] . $this->textColor[1] . $this->textColor[2] . $this->textColor[2] : $this->textColor) . '.png';
             header('Content-type: image/png');
@@ -209,7 +301,7 @@ class Placeholder {
                 imagedestroy($image);
             }
         } else {
-            throw new Exception('Placeholder size may not exceed ' . $this->maxWidth . 'x' . $this->maxHeight . ' pixels.');
+            throw new RuntimeException('Placeholder size may not exceed ' . $this->maxWidth . 'x' . $this->maxHeight . ' pixels.');
         }
     }
 
@@ -218,13 +310,14 @@ class Placeholder {
      * 
      * @param string $hex - hex code to convert to dec
      */
-     private function hexToDec($hex) {
+     private function hexToDec($hex)
+     {
         if (strlen($hex) === 3) {
             $rgbArray = array(hexdec($hex[0] . $hex[0]), hexdec($hex[1] . $hex[1]), hexdec($hex[2] . $hex[2]));
         } else if (strlen($hex) === 6) {
             $rgbArray = array(hexdec($hex[0] . $hex[1]), hexdec($hex[2] . $hex[3]), hexdec($hex[4] . $hex[5]));
         } else {
-            throw new Exception('Could not convert hex value to decimal.');
+            throw new InvalidArgumentException('Could not convert hex value to decimal.');
         }
         return $rgbArray;
      }
