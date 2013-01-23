@@ -1,5 +1,7 @@
 # img-src.co Placeholder Image Generator #
 
+[![Build Status](https://travis-ci.org/img-src/placeholder.png)](https://travis-ci.org/img-src/placeholder)
+
 ## About ##
 
 PHP placeholder image generator used on [http://img-src.co](http://img-src.co "img-src.co").
