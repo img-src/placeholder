@@ -24,8 +24,9 @@ class Placeholder {
 
     /**
      * Sets background color
-     * 
-     * @param string $hex - hex code value
+     *
+     * @param string $hex Hex code value
+     * @throws InvalidArgumentException
      */
     function setBackgroundColor($hex)
     {
@@ -50,8 +51,9 @@ class Placeholder {
 
     /**
      * Sets text color
-     * 
-     * @param string $hex - hex code value
+     *
+     * @param string $hex Hex code value
+     * @throws InvalidArgumentException
      */
     function setTextColor($hex)
     {
@@ -77,7 +79,8 @@ class Placeholder {
     /**
      * Sets location of TTF font
      * 
-     * @param string $fontPath - location of TTF font
+     * @param string $fontPath Location of TTF font
+     * @throws InvalidArgumentException
      */
     function setFont($fontPath)
     {
@@ -99,7 +102,8 @@ class Placeholder {
     /**
      * Set expires header value
      * 
-     * @param int $expires - seconds used in expires HTTP header 
+     * @param int $expires Seconds used in expires HTTP header
+     * @throws InvalidArgumentException
      */
     function setExpires($expires)
     {
@@ -121,7 +125,8 @@ class Placeholder {
     /**
      * Set maximum width allowed for placeholder image
      * 
-     * @param int $maxWidth - maximum width 
+     * @param int $maxWidth Maximum width of generated image
+     * @throws InvalidArgumentException
      */
     function setMaxWidth($maxWidth)
     {
@@ -143,7 +148,8 @@ class Placeholder {
     /**
      * Set maximum height allowed for placeholder image
      * 
-     * @param int $maxHeight - maximum height 
+     * @param int $maxHeight Maximum height of generated image
+     * @throws InvalidArgumentException
      */
     function setMaxHeight($maxHeight)
     {
@@ -165,7 +171,8 @@ class Placeholder {
     /**
      * Enable or disable cache
      * 
-     * @param bool $cache - whether or not to use cache
+     * @param bool $cache Whether or not to cache
+     * @throws InvalidArgumentException
      */
     function setCache($cache)
     {
@@ -187,7 +194,8 @@ class Placeholder {
     /**
      * Sets caching path
      * 
-     * @param string $cacheDir - path to cache folder, must be writable by web server
+     * @param string $cacheDir Path to cache folder, must be writable by web server
+     * @throws InvalidArgumentException
      */
     function setCacheDir($cacheDir)
     {
@@ -209,7 +217,8 @@ class Placeholder {
     /**
      * Set width of image to render
      * 
-     * @param int $width - width of image
+     * @param int $width Width of generated image
+     * @throws InvalidArgumentException
      */
     function setWidth($width)
     {
@@ -235,7 +244,8 @@ class Placeholder {
     /**
      * Set height of image to render
      * 
-     * @param int $height - height of image
+     * @param int $height Height of generated image
+     * @throws InvalidArgumentException
      */
     function setHeight($height)
     {
@@ -260,6 +270,8 @@ class Placeholder {
 
     /**
      * Display image and cache (if enabled)
+     *
+     * @throws RuntimeException
      */
     function render()
     {
@@ -308,7 +320,9 @@ class Placeholder {
     /**
      * Convert hex code to array of RGB decimal values
      * 
-     * @param string $hex - hex code to convert to dec
+     * @param string $hex Hex code to convert to dec
+     * @return array
+     * @throws InvalidArgumentException
      */
      private function hexToDec($hex)
      {
