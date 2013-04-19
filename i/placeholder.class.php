@@ -288,23 +288,9 @@ class Placeholder {
                 // cache disabled or no cached copy exists
                 // send header identifying cache miss if cache enabled
                 if ($this->cache === true) header('img-src-cache: miss');
-                $image = imagecreate($this->width, $this->height);
-                // convert backgroundColor hex to RGB values
-                list($bgR, $bgG, $bgB) = $this->hexToDec($this->backgroundColor);
-                $backgroundColor = imagecolorallocate($image, $bgR, $bgG, $bgB);
-                // convert textColor hex to RGB values
-                list($textR, $textG, $textB) = $this->hexToDec($this->textColor);
-                $textColor = imagecolorallocate($image, $textR, $textG, $textB);
-                $text = $this->width . 'x' . $this->height;
-                imagefilledrectangle($image, 0, 0, $this->width, $this->height, $backgroundColor);
-                $fontSize = 26;
-                $textBoundingBox = imagettfbbox($fontSize, 0, $this->font, $text);
-                // decrease the default font size until it fits nicely within the image
-                while (((($this->width - ($textBoundingBox[2] - $textBoundingBox[0])) < 10) || (($this->height - ($textBoundingBox[1] - $textBoundingBox[7])) < 10)) && ($fontSize > 1)) {
-                    $fontSize--;
-                    $textBoundingBox = imagettfbbox($fontSize, 0, $this->font, $text);
-                }
-                imagettftext($image, $fontSize, 0, ($this->width / 2) - (($textBoundingBox[2] - $textBoundingBox[0]) / 2), ($this->height / 2) + (($textBoundingBox[1] - $textBoundingBox[7]) / 2), $textColor, $this->font, $text);
+
+                $image = $this->createImage();
+
                 imagepng($image);
                 // write cache
                 if ($this->cache === true && is_writable($this->cacheDir)) {
@@ -315,6 +301,39 @@ class Placeholder {
         } else {
             throw new RuntimeException('Placeholder size may not exceed ' . $this->maxWidth . 'x' . $this->maxHeight . ' pixels.');
         }
+    }
+
+    private function createImage()
+    {
+        $image = imagecreate($this->width, $this->height);
+        // convert backgroundColor hex to RGB values
+        list($bgR, $bgG, $bgB) = $this->hexToDec($this->backgroundColor);
+        $backgroundColor = imagecolorallocate($image, $bgR, $bgG, $bgB);
+        // convert textColor hex to RGB values
+        list($textR, $textG, $textB) = $this->hexToDec($this->textColor);
+        $textColor = imagecolorallocate($image, $textR, $textG, $textB);
+        $text = $this->width . 'x' . $this->height;
+        imagefilledrectangle($image, 0, 0, $this->width, $this->height, $backgroundColor);
+        $fontSize = 26;
+        $textBoundingBox = imagettfbbox($fontSize, 0, $this->font, $text);
+        // decrease the default font size until it fits nicely within the image
+        while (((($this->width - ($textBoundingBox[2] - $textBoundingBox[0])) < 10) || (($this->height - ($textBoundingBox[1] - $textBoundingBox[7])) < 10)) && ($fontSize > 1)) {
+            $fontSize--;
+            $textBoundingBox = imagettfbbox($fontSize, 0, $this->font, $text);
+        }
+        imagettftext($image, $fontSize, 0, ($this->width / 2) - (($textBoundingBox[2] - $textBoundingBox[0]) / 2), ($this->height / 2) + (($textBoundingBox[1] - $textBoundingBox[7]) / 2), $textColor, $this->font, $text);
+
+        return $image;
+    }
+
+    function renderToFile($file)
+    {
+        if (!file_exists($file)) {
+            touch($file);
+        }
+        $image = $this->createImage();
+        imagepng($image, $file);
+        imagedestroy($image);
     }
 
     /**
