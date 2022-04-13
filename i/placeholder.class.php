@@ -314,13 +314,23 @@ class Placeholder {
         $textColor = imagecolorallocate($image, $textR, $textG, $textB);
         $text = $this->width . 'x' . $this->height;
         imagefilledrectangle($image, 0, 0, $this->width, $this->height, $backgroundColor);
-        $fontSize = 26;
-        $textBoundingBox = imagettfbbox($fontSize, 0, $this->font, $text);
-        // decrease the default font size until it fits nicely within the image
-        while (((($this->width - ($textBoundingBox[2] - $textBoundingBox[0])) < 10) || (($this->height - ($textBoundingBox[1] - $textBoundingBox[7])) < 10)) && ($fontSize > 1)) {
-            $fontSize--;
-            $textBoundingBox = imagettfbbox($fontSize, 0, $this->font, $text);
+
+        $fontSize = round(($this->width - 50) / 8);
+        if ($fontSize <= 9) {
+            $fontSize = 9;
         }
+
+        $textBoundingBox = imagettfbbox($fontSize, 0, $this->font, $text);
+
+        while ($textBoundingBox[4] >= $this->width) {
+            $fontSize -= round($fontSize / 2);
+            $textBoundingBox  = imagettfbbox($fontSize, 0, $this->font, $text);
+            if ($fontSize <= 9) {
+                $fontSize = 9;
+                break;
+            }
+        }
+
         imagettftext($image, $fontSize, 0, ($this->width / 2) - (($textBoundingBox[2] - $textBoundingBox[0]) / 2), ($this->height / 2) + (($textBoundingBox[1] - $textBoundingBox[7]) / 2), $textColor, $this->font, $text);
 
         return $image;
